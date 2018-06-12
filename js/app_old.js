@@ -1,34 +1,39 @@
-
-const arrayCards = ["fa-bomb", "fa-diamond", "fa-bicycle", "fa-leaf", "fa-bolt",
- "fa-paper-plane-o", "fa-anchor", "fa-cube", "fa-bomb",
- "fa-diamond", "fa-bicycle", "fa-leaf", "fa-bolt", "fa-paper-plane-o",
- "fa-anchor", "fa-cube"]; // List of classes (= card symbols) as an array
-
+/*
+ * Create a list that holds all of your cards
+ */
+NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+HTMLCollection.prototype.forEach = Array.prototype.forEach;
+const arrayCards = [];
 const deck = document.getElementById("deck").children;
 const newDeck = document.getElementById("deck");
+arrayCards.push(deck); // Adds all cards to empty array
+for (let item of arrayCards) {
+    console.log(item);
+};
+//console.log(arrayCards[4].toString().length);
+const numberOfCards = 16;
 
 function randomDeck(arrayCards) {
-    newDeck.innerHTML = ""; // Erase default deck
-    shuffle(arrayCards); // Shuffle the array of symbols
-    arrayCards.forEach(function(element, index){ // Create new deck with random cards' positions by looping through earch card in array and creating its HTML
-        console.log("Index: " + index + " and element: " + element);
-        let card = document.createElement("li");
-        let symbol = document.createElement("i");
-        card.classList.add("card");
-        card.classList.add("open");
-        card.classList.add("show");
-        symbol.classList.add("fa")
-        symbol.classList.add(element);
-        newDeck.appendChild(card);
-        card.appendChild(symbol);
+    shuffle(arrayCards);
+    arrayCards.forEach(function(element, index, arrayCards){
+        const z = document.createElement("li");
+       let test = z.innerHTML = arrayCards[index];
+       newDeck.appendChild(test);
     });
 };
 
 randomDeck(arrayCards);
 
+/*
+ * Display the cards on the page
+ *   - shuffle the list of cards using the provided "shuffle" method below
+ *   - loop through each card and create its HTML 
+ *   - add each card's HTML to the page
+ */
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(arrayCards) {
-    var currentIndex = arrayCards.length, temporaryValue, randomIndex;
+    var currentIndex = numberOfCards, temporaryValue, randomIndex;
     
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);

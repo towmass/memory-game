@@ -13,7 +13,7 @@ const newDeck = document.getElementById("deck");
 function randomDeck(arrayCards) {
     newDeck.innerHTML = ""; // Erase default deck
 
-    moves = 0;
+    moves = 0; // Reset moves
     moveCounter.innerText = moves; // Change number of moves
 
     shuffle(arrayCards); // Shuffle the array of symbols
@@ -77,11 +77,12 @@ function randomDeck(arrayCards) {
                         symbolsOrigin[index].classList.remove("fa", arrayCards[index]);
                     });
                     openCards = [];
-                }, 400)// end of setTimeout
+                }, 300)// end of setTimeout
                 symbolsToMatch = [];
                 } //end of else
-                moves += 1;
-                moveCounter.innerText = moves;
+                moves += 1; // Add one move
+                moveCounter.innerText = moves; // Show current number of moves
+                rating(); // Update the rating
             }; //end of else
 
            /*  if (openCards.includes(symbol)) {
@@ -112,6 +113,23 @@ function restart() { // Restart the game when clicking the restart button
     })
 };
 
+const stars = document.querySelector(".stars");
+function rating() { // Rating system which removes stars as moves add up
+    switch(moves) {
+        case 13:
+            stars.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star-o'></i></li>";
+        break;
+
+        case 21:
+            stars.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star-o'></i></li><li><i class='fa fa-star-o'></i></li>";
+        break;
+
+        case 33:
+            stars.innerHTML = "<li><i class='fa fa-star-o'></i></li><li><i class='fa fa-star-o'></i></li><li><i class='fa fa-star-o'></i></li>";
+        break;
+    }
+};
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(arrayCards) {
     var currentIndex = arrayCards.length, temporaryValue, randomIndex;
@@ -135,14 +153,6 @@ function shuffle(arrayCards) {
     }
 }; */
 
-    // add the card to a *list* of "open" cards
-    function addToOpenCards () { 
-        openedCards.push(e.target);
-    }
- //  - if the list already has another card, check to see if the two cards match
-function checkMatch() {
-
-};
 
  //    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
  //    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)

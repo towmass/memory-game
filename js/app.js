@@ -49,13 +49,13 @@ function randomDeck(arrayCards) {
             if (!item.classList.contains("open", "show", "match")) { // Prevent player from double clicking the same card or match card
 
             if (openCards.length <2) {
-                item.classList.add("open","show");
+                item.classList.add("open","show", "disable");
                 symbolsOrigin[index].classList.add("fa", arrayCards[index]);
                 currentCards.push(this);
                 console.log(currentCards);
                 } // End of if
             else { // If cards do not match, flip cards back
-                item.classList.add("open","show");
+                item.classList.add("open","show", "disable");
                 symbolsOrigin[index].classList.add("fa", arrayCards[index]);
 
                 if (symbolsToMatch[0] === symbolsToMatch[1]) { // Matching mechanism - comparing the cards
@@ -73,7 +73,7 @@ function randomDeck(arrayCards) {
                 console.log("doesnt match");
                 setTimeout(function() {
                     openCards.forEach(function(card){
-                        card.classList.remove("open", "show");
+                        card.classList.remove("open", "show", "disable");
                         symbolsOrigin[index].classList.remove("fa", arrayCards[index]);
                     });
                     openCards = [];
@@ -94,7 +94,7 @@ function randomDeck(arrayCards) {
 }; // end of randomDeck function
 
 randomDeck(arrayCards);
-
+restart();
 
 function finish() { // Check if the player finished the game
     let guessedCards = document.getElementsByClassName("match");
@@ -103,7 +103,14 @@ function finish() { // Check if the player finished the game
     } else {
         console.log("keep playin");
     }
-}
+};
+
+function restart() { // Restart the game when clicking the restart button
+    const restartButton = document.querySelector(".restart");
+    restartButton.addEventListener("click", function() {
+        randomDeck(arrayCards);
+    })
+};
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(arrayCards) {

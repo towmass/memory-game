@@ -20,6 +20,16 @@ function randomDeck(arrayCards) {
        let test = z.innerHTML = arrayCards[index];
        newDeck.appendChild(test);
     });
+
+
+/*   BACKUP              symbolsOrigin.forEach(function(sym, index) {
+                sym.classList.add("fa", arrayCards[index]);
+                // const match = symbol.classList.add("fa", item);
+                }); */
+                
+
+
+
 };
 
 randomDeck(arrayCards);

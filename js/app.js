@@ -14,10 +14,10 @@ function randomDeck(arrayCards) {
     newDeck.innerHTML = ""; // Erase default deck
 
     moves = 0;
-    moveCounter.innerText = moves;
+    moveCounter.innerText = moves; // Change number of moves
+
     shuffle(arrayCards); // Shuffle the array of symbols
     arrayCards.forEach(function(element){ // Create new deck with random cards' positions by looping through earch card in array and creating its HTML
-        //console.log("Index: " + index + " and element: " + element); // Test if forEach is working
         const card = document.createElement("li");
         const symbol = document.createElement("i");
         card.classList.add("card");
@@ -27,7 +27,6 @@ function randomDeck(arrayCards) {
 
         const symbolBuild = document.getElementsByTagName("i");
         }); // end of forEach loop
-       // symbol.style.visibility = "hidden";
 
        // // // // //  SECOND FOREACH // // // // // 
     const selectCards = document.getElementById("deck").children;
@@ -37,7 +36,7 @@ function randomDeck(arrayCards) {
     const symbolsOrigin = Array.from(selectSymbols);
     symbolsOrigin.splice(0, 4);
     let symbolsToMatch = [];
-    let currentCards = [];
+    let currentCards = [];     
     cards.forEach(function(item, index) {
         item.addEventListener("click", function (e){
             openCards.push(item);
@@ -47,33 +46,28 @@ function randomDeck(arrayCards) {
             const currentCard = this;
             const previousCard = openCards[0];
 
-            if (!item.classList.contains("open", "show", "match")) { // prevent player from double clicking the same card or match card
+            if (!item.classList.contains("open", "show", "match")) { // Prevent player from double clicking the same card or match card
 
             if (openCards.length <2) {
                 item.classList.add("open","show");
                 symbolsOrigin[index].classList.add("fa", arrayCards[index]);
                 currentCards.push(this);
                 console.log(currentCards);
-                } // end of if
-            else { // if cards do not match, flip cards back
+                } // End of if
+            else { // If cards do not match, flip cards back
                 item.classList.add("open","show");
                 symbolsOrigin[index].classList.add("fa", arrayCards[index]);
-                console.log(symbolsToMatch[0]);
-                console.log(this.innerHTML);
-                console.log(currentCards[0].innerHTML);
-                console.log(currentCards);
-                if (symbolsToMatch[0] === symbolsToMatch[1]) {
+
+                if (symbolsToMatch[0] === symbolsToMatch[1]) { // Matching mechanism - comparing the cards
                     console.log("Matched!");
                     let openShow = document.getElementsByClassName("open", "show");
                     console.log(openShow);
                     currentCard.classList.add("match");
                     previousCard.classList.add("match");
-                    /* openShow[0].classList.add("match");
-                    openShow[0].classList.remove("open", "show");
-                    openShow[1].classList.add("match");
-                    openShow[1].classList.remove("open", "show"); */
+
                     symbolsToMatch = [];
                     openCards = [];
+                    finish();
                 }
                 else {
                 console.log("doesnt match");
@@ -83,7 +77,7 @@ function randomDeck(arrayCards) {
                         symbolsOrigin[index].classList.remove("fa", arrayCards[index]);
                     });
                     openCards = [];
-                }, 700)// end of setTimeout
+                }, 400)// end of setTimeout
                 symbolsToMatch = [];
                 } //end of else
                 moves += 1;
@@ -94,13 +88,22 @@ function randomDeck(arrayCards) {
                 console.log("match!");
             };
             console.log("Opened cards: " + openCards.length); */
-            console.log(openCards);
         }}); // end of eventListener
     }); // end of forEach loop
 
 }; // end of randomDeck function
 
 randomDeck(arrayCards);
+
+
+function finish() { // Check if the player finished the game
+    let guessedCards = document.getElementsByClassName("match");
+    if (guessedCards.length == 16) {
+        console.log("GAME FINISHED !!!!");
+    } else {
+        console.log("keep playin");
+    }
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(arrayCards) {

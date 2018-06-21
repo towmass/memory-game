@@ -24,9 +24,7 @@ function randomDeck(arrayCards) {
         //symbol.classList.remove("fa", element);
         newDeck.appendChild(card);
         card.appendChild(symbol);
-
-        const symbolBuild = document.getElementsByTagName("i");
-        }); // end of forEach loop
+        }); // End of forEach loop
 
        // // // // //  SECOND FOREACH // // // // // 
     const selectCards = document.getElementById("deck").children;
@@ -34,7 +32,7 @@ function randomDeck(arrayCards) {
     console.log(cards);
     const selectSymbols = document.getElementsByTagName("i");
     const symbolsOrigin = Array.from(selectSymbols);
-    symbolsOrigin.splice(0, 4);
+    symbolsOrigin.splice(0, 6);
     let symbolsToMatch = [];
     let currentCards = [];     
     cards.forEach(function(item, index) {
@@ -52,7 +50,6 @@ function randomDeck(arrayCards) {
                 item.classList.add("open","show", "disable");
                 symbolsOrigin[index].classList.add("fa", arrayCards[index]);
                 currentCards.push(this);
-                console.log(currentCards);
                 } // End of if
             else { // If cards do not match, flip cards back
                 item.classList.add("open","show", "disable");
@@ -60,8 +57,6 @@ function randomDeck(arrayCards) {
 
                 if (symbolsToMatch[0] === symbolsToMatch[1]) { // Matching mechanism - comparing the cards
                     console.log("Matched!");
-                    let openShow = document.getElementsByClassName("open", "show");
-                    console.log(openShow);
                     currentCard.classList.add("match");
                     previousCard.classList.add("match");
 
@@ -70,20 +65,20 @@ function randomDeck(arrayCards) {
                     finish();
                 }
                 else {
-                console.log("doesnt match");
+                console.log("Does not match.");
                 setTimeout(function() {
                     openCards.forEach(function(card){
                         card.classList.remove("open", "show", "disable");
                         symbolsOrigin[index].classList.remove("fa", arrayCards[index]);
                     });
                     openCards = [];
-                }, 300)// end of setTimeout
+                }, 300) // End of setTimeout
                 symbolsToMatch = [];
-                } //end of else
+                } // End of else
                 moves += 1; // Add one move
                 moveCounter.innerText = moves; // Show current number of moves
                 rating(); // Update the rating
-            }; //end of else
+            }; // End of else
 
            /*  if (openCards.includes(symbol)) {
                 console.log("match!");
@@ -110,6 +105,7 @@ function restart() { // Restart the game when clicking the restart button
     const restartButton = document.querySelector(".restart");
     restartButton.addEventListener("click", function() {
         randomDeck(arrayCards);
+        stars.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li>";
     })
 };
 
@@ -117,15 +113,19 @@ const stars = document.querySelector(".stars");
 function rating() { // Rating system which removes stars as moves add up
     switch(moves) {
         case 13:
-            stars.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star-o'></i></li>";
+            stars.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star-o'></i></li>";
         break;
 
-        case 21:
-            stars.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star-o'></i></li><li><i class='fa fa-star-o'></i></li>";
+        case 18:
+            stars.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star-o'></i></li><li><i class='fa fa-star-o'></i></li>";
         break;
 
-        case 33:
-            stars.innerHTML = "<li><i class='fa fa-star-o'></i></li><li><i class='fa fa-star-o'></i></li><li><i class='fa fa-star-o'></i></li>";
+        case 24:
+            stars.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star-o'></i></li><li><i class='fa fa-star-o'></i></li><li><i class='fa fa-star-o'></i></li>";
+        break;
+
+        case 32:
+            stars.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star-o'></i></li><li><i class='fa fa-star-o'></i></li><li><i class='fa fa-star-o'></i></li><li><i class='fa fa-star-o'></i></li>";
         break;
     }
 };

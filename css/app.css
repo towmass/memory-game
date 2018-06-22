@@ -63,12 +63,21 @@ h1 {
     justify-content: center;
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+
+    /* For the flip animation */
+    transform-style: preserve-3d;
+    
 }
 
 .deck .card.open {
-    transform: rotateY(0);
+    /* transform: rotateY(130deg); */
     background: #02b3e4;
     cursor: default;
+
+    /* For the flip animation */
+    transform-origin: bottom center;
+    animation: flip .5s ease;
+    transition: all .2s ease;
 }
 
 .deck .card.show {
@@ -79,11 +88,45 @@ h1 {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
+
+    /* For the flip animation */
+    animation: match 1.5s 1;
 }
 
 .deck .card.disable {
     pointer-events: none;
 }
+
+.disable {
+    pointer-events: none;
+}
+
+    /* ANIMATIONS __________________________ */
+@keyframes flip {
+	0% {
+		transform: rotateY(180deg);
+	}
+}
+
+@keyframes match {
+	0% {
+		transform: rotateY(180deg);
+	}
+	25% {
+		transform: scale(1.1);
+	}
+	50% {
+		transform: scale(1.2, .9);
+	}
+	75% {
+		transform: scale(1.1);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+
 
 /*
  * Styles for the Score Panel

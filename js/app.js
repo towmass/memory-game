@@ -53,6 +53,7 @@ function randomDeck(arrayCards) {
                 } // End of if
             else { // If cards do not match, flip cards back
                 item.classList.add("open","show", "disable");
+                newDeck.classList.add("disable");
                 symbolsOrigin[index].classList.add("fa", arrayCards[index]);
 
                 if (symbolsToMatch[0] === symbolsToMatch[1]) { // Matching mechanism - comparing the cards
@@ -65,15 +66,17 @@ function randomDeck(arrayCards) {
                     finish();
                 }
                 else {
-                console.log("Does not match.");
-                setTimeout(function() {
-                    openCards.forEach(function(card){
-                        card.classList.remove("open", "show", "disable");
-                        symbolsOrigin[index].classList.remove("fa", arrayCards[index]);
-                    });
+                    console.log("Does not match.");
+                    setTimeout(function() {
+                        openCards.forEach(function(card){
+                            card.classList.remove("open", "show", "disable");
+                            symbolsOrigin[index].classList.remove("fa", arrayCards[index]);
+                        });
                     openCards = [];
-                }, 300) // End of setTimeout
-                symbolsToMatch = [];
+                    newDeck.classList.remove("disable");
+                    }, 600) // End of setTimeout
+                    symbolsToMatch = [];
+
                 } // End of else
                 moves += 1; // Add one move
                 moveCounter.innerText = moves; // Show current number of moves

@@ -64,13 +64,22 @@ function randomDeck(arrayCards) {
                     symbolsToMatch = [];
                     openCards = [];
                     finish();
+                    setTimeout(function() {
+                        newDeck.classList.remove("disable");
+                    }, 500);
+                    
                 }
                 else {
                     console.log("Does not match.");
                     setTimeout(function() {
                         openCards.forEach(function(card){
+                            card.classList.add("close");
                             card.classList.remove("open", "show", "disable");
                             symbolsOrigin[index].classList.remove("fa", arrayCards[index]);
+                            setTimeout(function() {
+                                card.classList.remove("close");
+                            }, 500);
+                            
                         });
                     openCards = [];
                     newDeck.classList.remove("disable");
@@ -109,6 +118,10 @@ function restart() { // Restart the game when clicking the restart button
     restartButton.addEventListener("click", function() {
         randomDeck(arrayCards);
         stars.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li>";
+        restartButton.classList.add("reset");
+        setTimeout(function() {
+            restartButton.classList.remove("reset");
+        }, 900);
     })
 };
 
@@ -157,7 +170,5 @@ function shuffle(arrayCards) {
 }; */
 
 
- //    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- //    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- //    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+
  //    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)

@@ -84,13 +84,17 @@ h1 {
     font-size: 33px;
 }
 
+.deck .card.close {
+    animation: unflip .5s ease;
+}
+
 .deck .card.match {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
 
     /* For the flip animation */
-    animation: match 1.5s 1;
+    animation: match 1s 1;
 }
 
 .deck .card.disable {
@@ -101,28 +105,39 @@ h1 {
     pointer-events: none;
 }
 
-    /* ANIMATIONS __________________________ */
+    /* animations */
 @keyframes flip {
 	0% {
 		transform: rotateY(180deg);
 	}
 }
 
-@keyframes match {
+@keyframes unflip {
 	0% {
 		transform: rotateY(180deg);
 	}
+	100% {
+		font-size: 0px;
+	}
+}
+
+
+@keyframes match {
+	0% {
+        transform: rotateY(180deg);
+        background-color: #02b3e4;
+	}
 	25% {
 		transform: scale(1.1);
-	}
-	50% {
-		transform: scale(1.2, .9);
+    }
+    50% {
+        transform: scale(1.0);
 	}
 	75% {
 		transform: scale(1.1);
 	}
 	100% {
-		transform: scale(1);
+		transform: scale(1.0);
 	}
 }
 
@@ -153,4 +168,21 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+.reset {
+    animation: reset .5s ease;
+}
+
+@keyframes reset {
+	0% {
+	}
+
+    50% {
+        transform: scale(1.2);
+        color: #02b3e4;
+	}
+	100% {
+		transform: scale(1.0);
+	}
 }

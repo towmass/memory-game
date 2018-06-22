@@ -6,6 +6,18 @@ const arrayCards = ["fa-bomb", "fa-diamond", "fa-bicycle", "fa-leaf", "fa-bolt",
 let openCards = []; //List of opened cards
 let moves;
 let moveCounter = document.querySelector(".moves");
+let readyTimer = false;
+let intervalLength;
+let timerGame = 0, second = 0, minute = 0; hour = 0;
+let finalTime;
+let guessedCards = document.getElementsByClassName("match");
+let gameTimer = document.querySelector(".game-length");
+
+function test() {
+    finalTime = gameTimer.innerText;
+    console.log(finalTime);
+    stopTimer();
+}
 
 const deck = document.getElementById("deck").children;
 const newDeck = document.getElementById("deck");
@@ -15,7 +27,6 @@ function randomDeck(arrayCards) {
 
     moves = 0; // Reset moves
     moveCounter.innerText = moves; // Change number of moves
-
     shuffle(arrayCards); // Shuffle the array of symbols
     arrayCards.forEach(function(element){ // Create new deck with random cards' positions by looping through earch card in array and creating its HTML
         const card = document.createElement("li");
@@ -25,7 +36,7 @@ function randomDeck(arrayCards) {
         newDeck.appendChild(card);
         card.appendChild(symbol);
         }); // End of forEach loop
-
+    setTimer();
        // // // // //  SECOND FOREACH // // // // // 
     const selectCards = document.getElementById("deck").children;
     const cards = Array.from(selectCards); 
@@ -89,6 +100,7 @@ function randomDeck(arrayCards) {
                 } // End of else
                 moves += 1; // Add one move
                 moveCounter.innerText = moves; // Show current number of moves
+                //firstMove();
                 rating(); // Update the rating
             }; // End of else
 
@@ -108,6 +120,9 @@ function finish() { // Check if the player finished the game
     let guessedCards = document.getElementsByClassName("match");
     if (guessedCards.length == 16) {
         console.log("GAME FINISHED !!!!");
+        finalTime = gameTimer.value;
+        stopTimer();
+        console.log("CG, your time is: " + finalTime);
     } else {
         console.log("keep playin");
     }
@@ -116,6 +131,8 @@ function finish() { // Check if the player finished the game
 function restart() { // Restart the game when clicking the restart button
     const restartButton = document.querySelector(".restart");
     restartButton.addEventListener("click", function() {
+        stopTimer();
+        timerGame = 0, second = 0, minute = 0; hour = 0;
         randomDeck(arrayCards);
         stars.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li>";
         restartButton.classList.add("reset");
@@ -145,6 +162,64 @@ function rating() { // Rating system which removes stars as moves add up
         break;
     }
 };
+
+function timer() {
+    counter =+ 1;
+    if (guessedCards.length == 16) {
+        console.log("STOP THE TIMER");
+        console.log("counter");
+        return;
+    }
+    gameTimer.innerHTML = counter;
+}
+
+firstMove();
+function firstMove() {
+    if (moves == 1) {
+        setTimer();
+    }
+}
+function setTimer() {
+    if (!readyTimer) {
+        readyTimer = true;
+        intervalLength = setInterval(function(){
+        timerGame++;
+        hour = Math.floor(timerGame/3600);
+        minute = Math.floor((timerGame - hour * 3600) / 60);
+        second = Math.floor(timerGame - hour * 3600 - minute * 60);
+        if (second < 10) {
+            second = "0" + second;
+        }
+        if (minute < 10) {
+            minute = "0" + minute;
+        }
+        if (hour < 10) {
+            hour = "0" + hour;
+        }
+       /*  if (second === 60) {
+            minute++;
+            second = 0;
+        }
+        if (minute === 60) {
+            hour++;
+            minute = 0;
+        } */
+        gameTimer.innerHTML = hour + ":" + minute + ":" + second;
+        }, 1000);
+        if (guessedCards.length == 16) {
+            console.log("STOP THE TIMER");
+            console.log("counter");
+            return;
+        }
+    }
+};
+
+function stopTimer() {
+    if (readyTimer) {
+        readyTimer = false;
+        clearInterval(intervalLength);
+    }
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(arrayCards) {

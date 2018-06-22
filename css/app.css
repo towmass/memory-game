@@ -30,7 +30,7 @@ body {
 
 h1 {
     font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 /*
@@ -149,7 +149,7 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 345px;
+    width: 500px;
     margin-bottom: 10px;
 }
 
@@ -157,12 +157,20 @@ h1 {
     margin: 0;
     padding: 0;
     display: inline-block;
-    margin: 0 5px 0 0;
+    margin: 0 20px 0 0;
 }
 
 .score-panel .stars li {
     list-style: none;
     display: inline-block;
+}
+
+.score-panel .moves {
+    margin: 0 20px 0 0;
+}
+
+.score-panel .game-length {
+    margin: 0 20px 0 0;
 }
 
 .score-panel .restart {

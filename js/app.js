@@ -37,7 +37,8 @@ function randomDeck(arrayCards) {
         card.appendChild(symbol);
         }); // End of forEach loop
     setTimer();
-       // // // // //  SECOND FOREACH // // // // // 
+    
+    // Second forEach
     const selectCards = document.getElementById("deck").children;
     const cards = Array.from(selectCards); 
     const selectSymbols = document.getElementsByTagName("i");
@@ -114,15 +115,17 @@ restart();
 
 function finish() { // Check if the player finished the game
     let guessedCards = document.getElementsByClassName("match");
-    if (guessedCards.length == 0) {
-        console.log("GAME FINISHED !!!!");
+    if (guessedCards.length == 16) {
+        moves += 1; // Record the final move
+        moveCounter.innerText = moves; // Show current number of moves
+        rating();
+        finalScore = stars.innerHTML;
+        finalMoves = moveCounter.innerText;
         finalTime = gameTimer.innerText;
+        moves--; // Number of moves - correction
         stopTimer();
         win();
-        console.log("CG, your time is: " + finalTime);
-    } else {
-        console.log("keep playin");
-    }
+    };
 };
 
 function win() { // Generate winner pop-up window with statistics
@@ -134,7 +137,7 @@ function win() { // Generate winner pop-up window with statistics
     document.body.appendChild(winContainer);
     winContainer.appendChild(win);
     let winText = "<h2 style='text-align:center'>Congratulations!</h2><span>You finished the game, see your statistics below:</span>";
-    let winStat = "<br><br><table class='win-table'><tr><td>Score: <strong>" + finalScore + "</strong></td></tr><tr><td>Moves: <strong>" + finalMoves + "</strong></td></tr><tr><td>Time: <strong>" + finalTime + "</strong></td></tr></table><br><br>";
+    let winStat = "<br><br><table class='win-table'><tr><td>Score: </td><td><ul class='win-stars'>" + finalScore + "</ul></td></td></tr><tr><td>Moves: </td><td><strong>" + finalMoves + "</strong></td></td></tr><tr><td>Time: </td><td><strong>" + finalTime + "</strong></td></td></tr></table>";
     const winAgain = "<button name='Play again' class='button'><i class='fa fa-repeat fa-spin'></i> Play again</button>";
     win.innerHTML = winText + winStat + winAgain;
     const button = document.querySelector(".button");
@@ -142,6 +145,7 @@ function win() { // Generate winner pop-up window with statistics
         timerGame = 0, second = 0, minute = 0; hour = 0; // Reset timer values
         gameTimer.innerHTML = "00:00:00"; // Reset timer display
         playAgain(); // Play a new game
+        stars.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li>";
         document.querySelector(".container").classList.remove("disable");
         document.querySelector(".container-win").remove(); // Remove winner pop-up window
     });
@@ -149,7 +153,7 @@ function win() { // Generate winner pop-up window with statistics
 
 function playAgain() {
     randomDeck(arrayCards);
-}
+};
 
 function restart() { // Restart the game when clicking the restart button
     const restartButton = document.querySelector(".restart");
@@ -214,11 +218,6 @@ function setTimer() {
         } */
         gameTimer.innerHTML = hour + ":" + minute + ":" + second;
         }, 1000);
-        if (guessedCards.length == 16) {
-            console.log("STOP THE TIMER");
-            console.log("counter");
-            return;
-        }
     }
 };
 

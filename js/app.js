@@ -9,7 +9,7 @@ let moveCounter = document.querySelector(".moves");
 let readyTimer = false;
 let intervalLength;
 let timerGame = 0, second = 0, minute = 0; hour = 0;
-let finalTime;
+let finalScore, finalMoves, finalTime;
 let guessedCards = document.getElementsByClassName("match");
 let gameTimer = document.querySelector(".game-length");
 
@@ -17,7 +17,7 @@ function test() {
     finalTime = gameTimer.innerText;
     console.log(finalTime);
     stopTimer();
-}
+};
 
 const deck = document.getElementById("deck").children;
 const newDeck = document.getElementById("deck");
@@ -28,7 +28,7 @@ function randomDeck(arrayCards) {
     moves = 0; // Reset moves
     moveCounter.innerText = moves; // Change number of moves
     shuffle(arrayCards); // Shuffle the array of symbols
-    arrayCards.forEach(function(element){ // Create new deck with random cards' positions by looping through earch card in array and creating its HTML
+    arrayCards.forEach(function(){ // Create new deck with random cards' positions by looping through earch card in array and creating its HTML
         const card = document.createElement("li");
         const symbol = document.createElement("i");
         card.classList.add("card");
@@ -40,7 +40,6 @@ function randomDeck(arrayCards) {
        // // // // //  SECOND FOREACH // // // // // 
     const selectCards = document.getElementById("deck").children;
     const cards = Array.from(selectCards); 
-    console.log(cards);
     const selectSymbols = document.getElementsByTagName("i");
     const symbolsOrigin = Array.from(selectSymbols);
     symbolsOrigin.splice(0, 6);
@@ -50,8 +49,6 @@ function randomDeck(arrayCards) {
         item.addEventListener("click", function (e){
             openCards.push(item);
             symbolsToMatch.push(arrayCards[index]);
-            console.log(symbolsToMatch)
-
             const currentCard = this;
             const previousCard = openCards[0];
 
@@ -68,7 +65,7 @@ function randomDeck(arrayCards) {
                 symbolsOrigin[index].classList.add("fa", arrayCards[index]);
 
                 if (symbolsToMatch[0] === symbolsToMatch[1]) { // Matching mechanism - comparing the cards
-                    console.log("Matched!");
+                    // Opened cards do match
                     currentCard.classList.add("match");
                     previousCard.classList.add("match");
 
@@ -80,8 +77,7 @@ function randomDeck(arrayCards) {
                     }, 500);
                     
                 }
-                else {
-                    console.log("Does not match.");
+                else { // Opened cards do not match
                     setTimeout(function() {
                         openCards.forEach(function(card){
                             card.classList.add("close");
@@ -118,21 +114,49 @@ restart();
 
 function finish() { // Check if the player finished the game
     let guessedCards = document.getElementsByClassName("match");
-    if (guessedCards.length == 16) {
+    if (guessedCards.length == 0) {
         console.log("GAME FINISHED !!!!");
-        finalTime = gameTimer.value;
+        finalTime = gameTimer.innerText;
         stopTimer();
+        win();
         console.log("CG, your time is: " + finalTime);
     } else {
         console.log("keep playin");
     }
 };
 
+function win() { // Generate winner pop-up window with statistics
+    document.querySelector(".container").classList.add("disable");
+    const winContainer = document.createElement("div");
+    winContainer.classList.add("container-win");
+    const win = document.createElement("div");
+    win.classList.add("win");
+    document.body.appendChild(winContainer);
+    winContainer.appendChild(win);
+    let winText = "<h2 style='text-align:center'>Congratulations!</h2><span>You finished the game, see your statistics below:</span>";
+    let winStat = "<br><br><table class='win-table'><tr><td>Score: <strong>" + finalScore + "</strong></td></tr><tr><td>Moves: <strong>" + finalMoves + "</strong></td></tr><tr><td>Time: <strong>" + finalTime + "</strong></td></tr></table><br><br>";
+    const winAgain = "<button name='Play again' class='button'><i class='fa fa-repeat fa-spin'></i> Play again</button>";
+    win.innerHTML = winText + winStat + winAgain;
+    const button = document.querySelector(".button");
+    button.addEventListener("click", function(){
+        timerGame = 0, second = 0, minute = 0; hour = 0; // Reset timer values
+        gameTimer.innerHTML = "00:00:00"; // Reset timer display
+        playAgain(); // Play a new game
+        document.querySelector(".container").classList.remove("disable");
+        document.querySelector(".container-win").remove(); // Remove winner pop-up window
+    });
+};
+
+function playAgain() {
+    randomDeck(arrayCards);
+}
+
 function restart() { // Restart the game when clicking the restart button
     const restartButton = document.querySelector(".restart");
     restartButton.addEventListener("click", function() {
         stopTimer();
         timerGame = 0, second = 0, minute = 0; hour = 0;
+        gameTimer.innerHTML = "00:00:00";
         randomDeck(arrayCards);
         stars.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li><li><i class='fa fa-star'></i></li>";
         restartButton.classList.add("reset");
@@ -163,22 +187,6 @@ function rating() { // Rating system which removes stars as moves add up
     }
 };
 
-function timer() {
-    counter =+ 1;
-    if (guessedCards.length == 16) {
-        console.log("STOP THE TIMER");
-        console.log("counter");
-        return;
-    }
-    gameTimer.innerHTML = counter;
-}
-
-firstMove();
-function firstMove() {
-    if (moves == 1) {
-        setTimer();
-    }
-}
 function setTimer() {
     if (!readyTimer) {
         readyTimer = true;

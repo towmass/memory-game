@@ -33,6 +33,11 @@ h1 {
     font-weight: 400;
 }
 
+h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+}
+
 /*
  * Styles for the deck of cards
  */
@@ -49,6 +54,7 @@ h1 {
     justify-content: space-between;
     align-items: center;
     margin: 0 0 3em;
+    z-index: 1;
 }
 
 .deck .card {
@@ -157,7 +163,7 @@ h1 {
     margin: 0;
     padding: 0;
     display: inline-block;
-    margin: 0 20px 0 0;
+    margin: 0 40px 0 0;
 }
 
 .score-panel .stars li {
@@ -166,11 +172,11 @@ h1 {
 }
 
 .score-panel .moves {
-    margin: 0 20px 0 0;
+    margin: 0 40px 0 0;
 }
 
 .score-panel .game-length {
-    margin: 0 20px 0 0;
+    margin: 0 40px 0 0;
 }
 
 .score-panel .restart {
@@ -193,4 +199,72 @@ h1 {
 	100% {
 		transform: scale(1.0);
 	}
+}
+
+.container-win {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.win {
+    color: #000000;
+    font-size: 16px;
+    width: 420px;
+    min-height: 380px;
+    background: linear-gradient(160deg, #14cebf 0%, #b98cdd 100%);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
+    position: absolute;
+    top: 20%;
+    -webkit-transition: width 2s, height 2s, -webkit-transform 2s; /* Safari */
+    transition: width 2s, height 2s;
+    transition-timing-function: ease;
+    z-index: 100;
+}
+
+.button {
+    color: #ffffff;
+    font-size: 18px;
+    height: 70px;
+    width: 180px;
+    border: 0;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.9);
+    transition: all 1s ease;
+}
+
+.button:hover {
+    color: #ffffff;
+    background: rgb(92, 6, 114);
+}
+
+.hide {
+    display: none !important;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    z-index: 10 !important;
+}
+
+.finish {
+    z-index: 1;
+    position: relative;
+    width: 50%;
+    height: 40%;
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    padding: 32px;
+    border-radius: 10px;
+    border: 5px solid #000000;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
 }

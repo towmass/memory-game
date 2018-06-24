@@ -1,20 +1,34 @@
 # Memory Game Project
 
+This web application was built by using HTML, CSS and JavaScript (as also utilizing the starter code - HTML and CSS parts - provided by Udacity).
+
+The memory game (or pexeso game) represents simple and visually appealing opportunity to just sit back, relax and nicely challenge one's brain.
+
 ## Table of Contents
 
-* [Instructions](#instructions)
+* [How To Play](#how to play)
+* [Dependencies](#dependencies)
 * [Contributing](#contributing)
 
-## Instructions
+## How To Play
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+The game starts automatically as soon as browser window is loaded (indicated by the running timer).
 
-To get started, open `js/app.js` and start building out the app's functionality
+Player's objective is to correctly guess all the card pairs by flipping only two of them at the time.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+At the beginning of the game, player's score is set to maximum (indicated by stars in the score panel) and decreases as player progresses with moves.
+
+Once all the cards are successfully matched (they remain flipped), player wins the game and receives pop-up window which includes statistics for given round and button for resetting the game.
+
+Player can enjoy this game across all the widely used devices.
+
+## Dependencies
+- [Font Awesome](https://fontawesome.com/)
+- [Shuffle Function](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array/2450976#2450976)
+- [Google Fonts](https://fonts.google.com/)
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+This project was made as a part of Udacity FEND Course 2018. Therefore, the author most likely will not accept pull requests.
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).

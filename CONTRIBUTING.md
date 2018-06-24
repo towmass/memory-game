@@ -1,3 +1,3 @@
 # How to contribute
 
-The files in this repository are used as the starting point for all students. Because we want students to write the majority of the code themselves, pull requests (most likely) will _not_ be merged into the project.
+The files in this repository are used as the presentation of learned skills in the Udacity FEND Course 2018. Its objective is to present individual's ability to complete given project, therefore, pull requests (most likely) will _not_ be merged into the project.

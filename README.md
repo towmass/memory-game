@@ -6,7 +6,7 @@ The memory game (or pexeso game) represents simple and visually appealing opport
 
 ## Table of Contents
 
-* [How To Play](#how to play)
+* [How To Play](#how_to_play)
 * [Dependencies](#dependencies)
 * [Contributing](#contributing)
 
@@ -23,9 +23,9 @@ Once all the cards are successfully matched (they remain flipped), player wins t
 Player can enjoy this game across all the widely used devices.
 
 ## Dependencies
-- [Font Awesome](https://fontawesome.com/)
-- [Shuffle Function](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array/2450976#2450976)
-- [Google Fonts](https://fonts.google.com/)
+- [Font Awesome](https://fontawesome.com/) - for card symbols
+- [Shuffle Function](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array/2450976#2450976) - for random cards generator
+- [Google Fonts](https://fonts.google.com/) - for in-app text
 
 ## Contributing
 

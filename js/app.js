@@ -1,9 +1,9 @@
 // Pexeso Game 2018 by Tomas Mandok
 
-const arrayCards = ["fa-bomb", "fa-diamond", "fa-bicycle", "fa-leaf", "fa-bolt",
- "fa-paper-plane-o", "fa-anchor", "fa-cube", "fa-bomb",
- "fa-diamond", "fa-bicycle", "fa-leaf", "fa-bolt", "fa-paper-plane-o",
- "fa-anchor", "fa-cube"]; // List of classes (= card symbols) as an array
+const arrayCards = ["fa-bug", "fa-diamond", "fa-bicycle", "fa-paw", "fa-bolt",
+ "fa-rocket", "fa-anchor", "fa-heart-o", "fa-bug",
+ "fa-diamond", "fa-bicycle", "fa-paw", "fa-bolt", "fa-rocket",
+ "fa-anchor", "fa-heart-o"]; // List of classes (= card symbols) as an array
 const deck = document.getElementById("deck").children; // Select individual cards
 const newDeck = document.getElementById("deck"); // Select the whole deck
 const stars = document.querySelector(".stars"); // Select the unordered list of score (stars)

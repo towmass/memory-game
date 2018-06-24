@@ -1,30 +1,25 @@
+// Pexeso Game 2018 by Tomas Mandok
 
 const arrayCards = ["fa-bomb", "fa-diamond", "fa-bicycle", "fa-leaf", "fa-bolt",
  "fa-paper-plane-o", "fa-anchor", "fa-cube", "fa-bomb",
  "fa-diamond", "fa-bicycle", "fa-leaf", "fa-bolt", "fa-paper-plane-o",
  "fa-anchor", "fa-cube"]; // List of classes (= card symbols) as an array
-let openCards = []; //List of opened cards
+const deck = document.getElementById("deck").children; // Select individual cards
+const newDeck = document.getElementById("deck"); // Select the whole deck
+const stars = document.querySelector(".stars"); // Select the unordered list of score (stars)
+
+let openCards = []; // List of opened cards
 let moves;
 let moveCounter = document.querySelector(".moves");
 let readyTimer = false;
 let intervalLength;
-let timerGame = 0, second = 0, minute = 0; hour = 0;
-let finalScore, finalMoves, finalTime;
-let guessedCards = document.getElementsByClassName("match");
+let timerGame = 0, second = 0, minute = 0; hour = 0; // Initializing timer variables
+let finalScore, finalMoves, finalTime; // Initializing winner statistics variables
+let guessedCards = document.getElementsByClassName("match"); // Select matched cards (for monitoring of progress of the game)
 let gameTimer = document.querySelector(".game-length");
 
-function test() {
-    finalTime = gameTimer.innerText;
-    console.log(finalTime);
-    stopTimer();
-};
-
-const deck = document.getElementById("deck").children;
-const newDeck = document.getElementById("deck");
-
-function randomDeck(arrayCards) {
+function randomDeck(arrayCards) { // Setting deck's appearance and functionalities
     newDeck.innerHTML = ""; // Erase default deck
-
     moves = 0; // Reset moves
     moveCounter.innerText = moves; // Change number of moves
     shuffle(arrayCards); // Shuffle the array of symbols
@@ -36,9 +31,9 @@ function randomDeck(arrayCards) {
         newDeck.appendChild(card);
         card.appendChild(symbol);
         }); // End of forEach loop
-    setTimer();
+    setTimer(); // Call the function to set the timer properties
     
-    // Second forEach
+    // Second forEach section
     const selectCards = document.getElementById("deck").children;
     const cards = Array.from(selectCards); 
     const selectSymbols = document.getElementsByTagName("i");
@@ -46,7 +41,7 @@ function randomDeck(arrayCards) {
     symbolsOrigin.splice(0, 6);
     let symbolsToMatch = [];
     let currentCards = [];     
-    cards.forEach(function(item, index) {
+    cards.forEach(function(item, index) { // Set 
         item.addEventListener("click", function (e){
             openCards.push(item);
             symbolsToMatch.push(arrayCards[index]);
@@ -59,8 +54,7 @@ function randomDeck(arrayCards) {
                 item.classList.add("open","show", "disable");
                 symbolsOrigin[index].classList.add("fa", arrayCards[index]);
                 currentCards.push(this);
-                } // End of if
-            else { // If cards do not match, flip cards back
+                } else { // If cards do not match, flip cards back
                 item.classList.add("open","show", "disable");
                 newDeck.classList.add("disable");
                 symbolsOrigin[index].classList.add("fa", arrayCards[index]);
@@ -77,8 +71,7 @@ function randomDeck(arrayCards) {
                         newDeck.classList.remove("disable");
                     }, 500);
                     
-                }
-                else { // Opened cards do not match
+                } else { // Opened cards do not match
                     setTimeout(function() {
                         openCards.forEach(function(card){
                             card.classList.add("close");
@@ -94,24 +87,19 @@ function randomDeck(arrayCards) {
                     }, 600) // End of setTimeout
                     symbolsToMatch = [];
 
-                } // End of else
+                }; // End of else
                 moves += 1; // Add one move
                 moveCounter.innerText = moves; // Show current number of moves
                 //firstMove();
                 rating(); // Update the rating
             }; // End of else
-
-           /*  if (openCards.includes(symbol)) {
-                console.log("match!");
-            };
-            console.log("Opened cards: " + openCards.length); */
         }}); // end of eventListener
     }); // end of forEach loop
 
-}; // end of randomDeck function
+} // end of randomDeck function
 
-randomDeck(arrayCards);
-restart();
+randomDeck(arrayCards); // Call the main function for setting the deck and adding functionalities to its elements
+restart(); // Call the restart function to monitor player's intention to reset the game
 
 function finish() { // Check if the player finished the game
     let guessedCards = document.getElementsByClassName("match");
@@ -126,7 +114,7 @@ function finish() { // Check if the player finished the game
         stopTimer();
         win();
     };
-};
+}
 
 function win() { // Generate winner pop-up window with statistics
     document.querySelector(".container").classList.add("disable");
@@ -149,11 +137,11 @@ function win() { // Generate winner pop-up window with statistics
         document.querySelector(".container").classList.remove("disable");
         document.querySelector(".container-win").remove(); // Remove winner pop-up window
     });
-};
+}
 
 function playAgain() {
     randomDeck(arrayCards);
-};
+}
 
 function restart() { // Restart the game when clicking the restart button
     const restartButton = document.querySelector(".restart");
@@ -168,9 +156,9 @@ function restart() { // Restart the game when clicking the restart button
             restartButton.classList.remove("reset");
         }, 900);
     })
-};
+}
 
-const stars = document.querySelector(".stars");
+
 function rating() { // Rating system which removes stars as moves add up
     switch(moves) {
         case 13:
@@ -189,9 +177,9 @@ function rating() { // Rating system which removes stars as moves add up
             stars.innerHTML = "<li><i class='fa fa-star'></i></li><li><i class='fa fa-star-o'></i></li><li><i class='fa fa-star-o'></i></li><li><i class='fa fa-star-o'></i></li><li><i class='fa fa-star-o'></i></li>";
         break;
     }
-};
+}
 
-function setTimer() {
+function setTimer() { // Set timer properties
     if (!readyTimer) {
         readyTimer = true;
         intervalLength = setInterval(function(){
@@ -219,7 +207,7 @@ function setTimer() {
         gameTimer.innerHTML = hour + ":" + minute + ":" + second;
         }, 1000);
     }
-};
+}
 
 function stopTimer() {
     if (readyTimer) {
@@ -240,17 +228,4 @@ function shuffle(arrayCards) {
         arrayCards[randomIndex] = temporaryValue;
     }
     return arrayCards;
-};
-
-
- // set up the event listener for a card. If a card is clicked:
-/* function clickedCard(event) {
-    if(event.target && event.target.nodeName === "LI") {
-
-        symbol.classList.remove("fa", element);
-    }
-}; */
-
-
-
- //    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+}

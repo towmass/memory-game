@@ -30,17 +30,17 @@ body {
 
 h1 {
     font-family: 'Open Sans', sans-serif;
+    font-size: 2.2rem;
     font-weight: 400;
 }
 
 h2 {
     font-family: 'Open Sans', sans-serif;
+    font-size: 1.8rem;
     font-weight: 500;
 }
 
-/*
- * Styles for the deck of cards
- */
+/* STYLES FOR DECK OF CARDS */
 
 .deck {
     width: 660px;
@@ -53,7 +53,7 @@ h2 {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 3em;
+    margin: 0 0 2em;
     z-index: 1;
 }
 
@@ -148,13 +148,10 @@ h2 {
 }
 
 
-
-/*
- * Styles for the Score Panel
- */
+/* STYLES FOR SCORE PANEL */
 
 .score-panel {
-    text-align: left;
+    text-align: center;
     width: 500px;
     margin-bottom: 10px;
 }
@@ -200,6 +197,8 @@ h2 {
 	}
 }
 
+/* WINNER MODULES */
+
 .container-win {
     display: flex;
     justify-content: center;
@@ -209,7 +208,7 @@ h2 {
 
 .win {
     color: #ffffff;
-    font-size: 16px;
+    font-size: 1rem;
     width: 460px;
     min-height: 380px;
     background: linear-gradient(160deg, #08b4a6 0%, #783ea8 100%);
@@ -246,7 +245,7 @@ h2 {
 
 .button {
     color: #ffffff;
-    font-size: 18px;
+    font-size: 1.125rem;
     height: 70px;
     width: 160px;
     border: 0;
@@ -271,19 +270,123 @@ h2 {
     z-index: 10 !important;
 } */
 
-.finish {
-    z-index: 1;
-    position: relative;
-    width: 50%;
-    height: 40%;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
-    border-radius: 10px;
-    border: 5px solid #000000;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
-}
-
 .credit {
     color: #b3b3b3;
-    font-size: 0.9em;
+    font-size: 0.8rem;
+}
+
+/* RESPONSIVE DESIGN */
+
+/* Small mobiles */
+@media screen and (max-width: 365px) {
+    .deck {
+        max-width: 270px;
+        min-height: 300px;
+        padding: 14px;
+    }
+    .deck .card {
+        height: 52px;
+        width: 52px;
+    }
+    .deck .card.show {
+        font-size: 17px;
+    }
+    .deck .card.match {
+        font-size: 17px;
+    }
+    .score-panel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .score-panel .restart {
+        margin: 0;
+    }
+    .score-panel .stars {
+        margin: 0;
+    }
+    .score-panel .moves {
+        margin: 0;
+    }
+    .score-panel .game-length {
+        margin: 0;
+    }
+    .win {
+        width: 290px;
+        min-height: 380px;
+        background: linear-gradient(160deg, #08b4a6 0%, #783ea8 100%);
+        padding: 20px;
+        border: solid 10px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Large mobiles*/
+@media screen and (min-width: 366px) and (max-width: 640px) {
+    .deck {
+        max-width: 290px;
+        min-height: 320px;
+        padding: 16px;
+    }
+    .deck .card {
+        height: 56px;
+        width: 56px;
+    }
+    .deck .card.show {
+        font-size: 19px;
+    }
+    .deck .card.match {
+        font-size: 19px;
+    }
+    .score-panel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .score-panel .restart {
+        margin: 0;
+    }
+    .score-panel .stars {
+        margin: 0;
+    }
+    .score-panel .moves {
+        margin: 0;
+    }
+    .score-panel .game-length {
+        margin: 0;
+    }
+    .win {
+        width: 300px;
+        min-height: 380px;
+        background: linear-gradient(160deg, #08b4a6 0%, #783ea8 100%);
+        padding: 20px;
+        border: solid 10px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Tablets */
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+    .deck {
+        max-width: 420px;
+        min-height: 450px;
+        padding: 20px;
+      }
+      .deck .card {
+        height: 80px;
+        width: 80px;
+      }
+    .deck .card.show {
+        font-size: 26px;
+    }
+    .deck .card.match {
+        font-size: 26px;
+    }
+    .win {
+        width: 500px;
+        min-height: 470px;
+        background: linear-gradient(160deg, #08b4a6 0%, #783ea8 100%);
+        padding: 20px;
+        border: solid 10px rgba(0, 0, 0, 0.1);
+    }
 }
